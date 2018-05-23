@@ -54,7 +54,7 @@ public class HttpConnect {
     }
 
 
-    public static Forecast getTimeFromJson(JSONObject json){
+    public static Forecast getForecastFromJson(JSONObject json){
         String previsao;
         Integer highTemp, lowTemp;
         String dayWeek;
@@ -79,12 +79,11 @@ public class HttpConnect {
 
         ArrayList<Forecast> arrayList = new ArrayList<>();
         try {
-             JSONObject results = json.getJSONObject("query");
-             results = json.getJSONObject("channel");
-            JSONArray jsonForecast = results.getJSONArray("results");
+             JSONObject results = json.getJSONObject("results");
+            JSONArray jsonForecast = results.getJSONArray("forecast");
 
             for(Integer i=0; i<jsonForecast.length(); i++){
-                arrayList.add(getTimeFromJson(jsonForecast.getJSONObject(i)));
+                arrayList.add(getForecastFromJson(jsonForecast.getJSONObject(i)));
             }
 
 
