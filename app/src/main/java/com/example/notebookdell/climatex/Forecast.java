@@ -24,11 +24,11 @@ public class Forecast {
     }
 
     public String getHighTemp() {
-        return "Temperatura: "+highTemp.toString();
+        return "Temperatura Maxima: "+highTemp.toString();
     }
 
     public String getLowTemp() {
-        return "Temperatura: "+lowTemp.toString();
+        return "Temperatura Minima: "+lowTemp.toString();
     }
 
     public String getDayWeek() {
