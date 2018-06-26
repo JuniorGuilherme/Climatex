@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Climatex.iml" filepath="$PROJECT_DIR$/Climatex.iml" />
+      <module fileurl="file://C:\Users\PC-Gamer\StudioProjects\Climatex\Climatex.iml" filepath="C:\Users\PC-Gamer\StudioProjects\Climatex\Climatex.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\PC-Gamer\StudioProjects\Climatex\app\app.iml" filepath="C:\Users\PC-Gamer\StudioProjects\Climatex\app\app.iml" />
     </modules>
   </component>
 </project>

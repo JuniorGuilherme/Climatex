@@ -21,15 +21,15 @@ import java.util.ArrayList;
  */
 
 public class HttpConnect {
-    public static String URL="https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22Brazil%2C%20S%C3%A3o%20Jo%C3%A3o%20do%20Sul%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys";
 
 
-    private static HttpURLConnection connectar(String urlWebservice) {
+
+    private static HttpURLConnection connectar(String city) {
 
         final int SEGUNDOS = 10000;
 
         try {
-            java.net.URL url = new URL(urlWebservice);
+            java.net.URL url = new URL(" https://api.hgbrasil.com/weather/?format=json&city_name="+city+"&key=b7e25fc2");
             HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
             conexao.setReadTimeout(10 * SEGUNDOS);
             conexao.setConnectTimeout(15 * SEGUNDOS);
@@ -62,11 +62,11 @@ public class HttpConnect {
         Forecast time=null;
 
         try {
-            previsao=json.getString("text");
-            dayWeek=json.getString("day");
+            previsao=json.getString("description");
+            dayWeek=json.getString("weekday");
             date=json.getString("date");
-            highTemp=json.getInt("high");
-            lowTemp=json.getInt("low");
+            highTemp=json.getInt("max");
+            lowTemp=json.getInt("min");
             time = new Forecast(previsao, highTemp, lowTemp, dayWeek, date);
         }catch (JSONException ex){
             Log.d("ERROR",ex.getMessage());
@@ -82,7 +82,7 @@ public class HttpConnect {
              JSONObject results = json.getJSONObject("results");
             JSONArray jsonForecast = results.getJSONArray("forecast");
 
-            for(Integer i=0; i<jsonForecast.length(); i++){
+            for(Integer i=1; i<8; i++){
                 arrayList.add(getForecastFromJson(jsonForecast.getJSONObject(i)));
             }
 
@@ -96,9 +96,9 @@ public class HttpConnect {
 
     }
 
-    public static ArrayList<Forecast> loadForecastWeek() {
+    public static ArrayList<Forecast> loadForecastWeek(String city) {
         try {
-            HttpURLConnection connection = connectar(URL);
+            HttpURLConnection connection = connectar(city);
             int response = connection.getResponseCode();
             if (response == HttpURLConnection.HTTP_OK) {
                 InputStream inputStream = connection.getInputStream();

@@ -9,6 +9,7 @@ public class Forecast {
     private Integer highTemp, lowTemp;
     private String dayWeek;
     private String date;
+    private String cidade;
 
 
     public Forecast(String previsao, Integer highTemp, Integer lowTemp, String dayWeek, String date){
@@ -24,11 +25,11 @@ public class Forecast {
     }
 
     public String getHighTemp() {
-        return "Temperatura Maxima: "+highTemp.toString();
+        return "Maxima: "+highTemp.toString();
     }
 
     public String getLowTemp() {
-        return "Temperatura Minima: "+lowTemp.toString();
+        return "Minima: "+lowTemp.toString();
     }
 
     public String getDayWeek() {

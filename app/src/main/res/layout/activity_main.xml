@@ -7,16 +7,23 @@
     tools:context="com.example.notebookdell.climatex.MainActivity"
     android:orientation="vertical">
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Digite sua cidade.."
+        android:id="@+id/etCidade"/>
+
+    <Button
+        android:text="Atualizar Previsao Climática"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnAtualizar"/>
+
     <ListView android:layout_margin="8dp"
         android:id="@+id/listForecast"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_weight="10" />
 
-
-    <Button
-        android:text="Atualizar Previsao Climática"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
 </LinearLayout>

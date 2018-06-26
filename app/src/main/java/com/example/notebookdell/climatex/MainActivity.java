@@ -3,7 +3,10 @@ package com.example.notebookdell.climatex;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -13,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     ForecastTask mTask;
     ArrayList<Forecast> mForecast;
     ListView mListForecast;
+    EditText etCidade;
+    Button btnAtualizar;
     ArrayAdapter<Forecast> mAdapter;
 
     @Override
@@ -20,7 +25,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mListForecast = findViewById(R.id.listForecast);
+        etCidade = findViewById(R.id.etCidade);
+        btnAtualizar = findViewById(R.id.btnAtualizar);
         search();
+
+        btnAtualizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startDownload();
+            }
+        });
     }
 
     private void search() {
@@ -33,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         if (mTask == null) {
             if (HttpConnect.hasConnected(this)) {
                 startDownload();
+                Toast.makeText(getApplicationContext(), "Tim", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(getApplicationContext(), "Sem conexão...", Toast.LENGTH_LONG).show();
             }
@@ -53,19 +68,17 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            //showProgress(true);
             Toast.makeText(getApplicationContext(), "Pronto...", Toast.LENGTH_LONG).show();
         }
 
         @Override
         protected ArrayList<Forecast> doInBackground(Void... strings) {
-            ArrayList<Forecast> forecastWeek = HttpConnect.loadForecastWeek();
+            ArrayList<Forecast> forecastWeek = HttpConnect.loadForecastWeek(etCidade.getText().toString());
             return forecastWeek;
         }
         @Override
         protected void onPostExecute(ArrayList<Forecast> forecastWeek) {
             super.onPostExecute(forecastWeek);
-            //     showProgress(false);
             if (forecastWeek != null) {
                 mForecast.clear();
                 mForecast.addAll(forecastWeek);
